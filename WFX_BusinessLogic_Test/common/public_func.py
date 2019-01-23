@@ -10,6 +10,9 @@ from test_db.test_db import db
 import requests
 from common.ban_warning import *
 
+# data
+phone = ['15013038819']
+
 
 # 断言json
 def assert_json(json_obj, key, v):
@@ -26,7 +29,7 @@ def app_login():
         "mobile_fiex": "86",
         "sign": "5sCioY2cazwBz0aN\/Wa75zO8S6VmRdPJkijw9NQVD2XnnYqpLFI0jymDr0nnJ6kl",
         "apptype": "ios",
-        "phone": "15013038819",
+        "phone": phone[0],
         "version": "2.4.0",
         "did": "12345dg"
     }
@@ -110,6 +113,53 @@ def sclect_user(user_id):
         return d3
 
 
+def time_calculation():
+    n = datetime.datetime.now()
+    print('n:', n, type(n))
+    n1 = n.strftime("%Y%m%d")
+    print('n1:', n1, type(n1))
+    n2 = '{}-{}-{}'.format(n1[0:4], n1[4:6], n1[6:8])
+    print('n2:', n2, type(2))
+    n3 = datetime.datetime.strptime(n2, '%Y-%m-%d')
+    print('n3:', n3, type(n3))
+    n4 = n3 + datetime.timedelta(days=1)
+    print('n4:', n4, type(n4))
+    n5 = n + datetime.timedelta(days=1)
+    print('n5:', n5, type(n5))
+    print(n5.strftime('%Y-%m-%d'))
+
+
+def get_last_month_first_day():
+    import datetime
+    """
+    获取上个月第一天的日期，
+    :return: 返回日期
+    """
+    today = datetime.datetime.today()
+
+    year = today.year
+    month = today.month
+    if month == 1:
+        month = 12
+        year -= 1
+    else:
+        month -= 1
+    res = datetime.datetime(year, month, 1) + datetime.timedelta(days=0)
+    return res.strftime('%Y-%m-%d')
+
+
+def get_last_month_last_day():
+    import datetime
+    """
+    获取上个月最后一天
+    :return:
+    """
+    today = datetime.date.today()
+    first = today.replace(day=1)
+    last_month = first - datetime.timedelta(days=1)
+    return last_month
+
+
 if __name__ == '__main__':
     pass
     # print(app_login())
@@ -120,7 +170,6 @@ if __name__ == '__main__':
     import datetime
 
     # np = 20190109
-    #
     # n = datetime.datetime.now()
     # print(n)
     # n1 = n.strftime("%Y%m%d")
@@ -163,4 +212,3 @@ if __name__ == '__main__':
     #     print('1')
     # else:
     #     print("2")
-    print()

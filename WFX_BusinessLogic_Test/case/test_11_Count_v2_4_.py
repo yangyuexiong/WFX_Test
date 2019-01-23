@@ -2,7 +2,7 @@
 # @Time    : 2019/1/15 2:58 PM
 # @Author  : ShaHeTop-Almighty-ares
 # @Email   : yang6333yyx@126.com
-# @File    : test_11_Count.py
+# @File    : test_11_Count_v2_4_.py
 # @Software: PyCharm
 
 
@@ -166,6 +166,7 @@ def pingcang():
         print('====持仓为空====')
 
 
+@unittest.skip('废弃v2.4版本')
 class TotalAssets(StartEnd):
     """总资产"""
 
@@ -227,6 +228,7 @@ class TotalAssets(StartEnd):
         print(zijin_dict)
 
 
+@unittest.skip('废弃v2.4版本')
 class YesterdayIncome(StartEnd):
     """昨日收益"""
 
@@ -238,6 +240,7 @@ class YesterdayIncome(StartEnd):
         assert zuori_count == float(zijin_dict['昨日跟随收益']) + float(zijin_dict['昨日交易收益'])
 
 
+@unittest.skip('废弃v2.4版本')
 class AccumulatedIncome(StartEnd):
     """累计收益"""
 
@@ -281,6 +284,7 @@ class AccumulatedIncome(StartEnd):
         """3"""
 
 
+@unittest.skip('废弃v2.4版本')
 class AvailableBalance(StartEnd):
     """可用余额"""
 
