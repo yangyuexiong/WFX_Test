@@ -30,14 +30,14 @@ class TotalAssets(StartEnd):
         # 波浪余额 = 总资产 - 跟随总金额 - 跟随收益 - MT5余额
         r = get_user_info()
         print(r)
-        assert r['波浪余额'] == r['总资产'] - r['跟随总金额'] - r['跟随收益'] - r['MT5账户余额']
+        assert r['波浪余额'] == round(r['总资产'] - r['跟随总金额'] - r['跟随收益'] - r['MT5账户余额'], 2)
 
     def test_02(self):
         """跟随总金额"""
         r = get_user_info()
         print(r)
         # 跟随总金额 = 总资产 - 波浪余额 - 跟随收益 - MT5余额
-        assert r['跟随总金额'] == r['总资产'] - r['波浪余额'] - r['跟随收益'] - r['MT5账户余额']
+        assert r['跟随总金额'] == round(r['总资产'] - r['波浪余额'] - r['跟随收益'] - r['MT5账户余额'], 2)
 
     def test_03(self):
         """跟随收益"""
@@ -71,8 +71,8 @@ class IncomeStatement(StartEnd):
         r = profit(date='zr')
         print(r[0])
         print(r[1])
-        assert r[0]['昨日合计收益'] == r[0]['昨日跟随收益'] + r[0]['昨日交易收益'] + r[0]['昨日活动收益']
-        assert r[0]['昨日合计收益'] == r[1]['昨日跟随收益'] + r[1]['昨日交易收益'] + r[1]['昨日活动收益']
+        assert r[0]['昨日合计收益'] == round(r[0]['昨日跟随收益'] + r[0]['昨日交易收益'] + r[0]['昨日活动收益'], 2)
+        assert r[0]['昨日合计收益'] == round(r[1]['昨日跟随收益'] + r[1]['昨日交易收益'] + r[1]['昨日活动收益'], 2)
 
     def test_02(self):
         """累计-总收益"""
@@ -80,8 +80,8 @@ class IncomeStatement(StartEnd):
         r = profit(date='lj')
         print(r[0])
         print(r[1])
-        assert r[0]['累计-总收益'] == r[0]['跟随-总收益'] + r[0]['交易-总收益'] + r[0]['活动-总收益']
-        assert r[0]['累计-总收益'] == r[1]['跟单收益-总和'] + r[1]['交易收益-总和'] + r[1]['活动获得奖金-总和']
+        assert r[0]['累计-总收益'] == round(r[0]['跟随-总收益'] + r[0]['交易-总收益'] + r[0]['活动-总收益'], 2)
+        assert r[0]['累计-总收益'] == round(r[1]['跟单收益-总和'] + r[1]['交易收益-总和'] + r[1]['活动获得奖金-总和'], 2)
 
     def test_03(self):
         """本月收益"""
@@ -89,8 +89,8 @@ class IncomeStatement(StartEnd):
         r = profit(date='by')
         print(r[0])
         print(r[1])
-        assert r[0]['本月合计收益'] == r[0]['本月跟随收益'] + r[0]['本月交易收益'] + r[0]['本月活动收益']
-        assert r[0]['本月合计收益'] == r[1]['本月跟随收益'] + r[1]['本月交易收益'] + r[1]['本月活动收益']
+        assert r[0]['本月合计收益'] == round(r[0]['本月跟随收益'] + r[0]['本月交易收益'] + r[0]['本月活动收益'], 2)
+        assert r[0]['本月合计收益'] == round(r[1]['本月跟随收益'] + r[1]['本月交易收益'] + r[1]['本月活动收益'], 2)
 
     def test_04(self):
         """上月收益"""
@@ -98,8 +98,8 @@ class IncomeStatement(StartEnd):
         r = profit(date='sy')
         print(r[0])
         print(r[1])
-        assert r[0]['上月合计收益'] == r[0]['上月跟随收益'] + r[0]['上月交易收益'] + r[0]['上月活动收益']
-        assert r[0]['上月合计收益'] == r[1]['上月跟随收益'] + r[1]['上月交易收益'] + r[1]['上月活动收益']
+        assert r[0]['上月合计收益'] == round(r[0]['上月跟随收益'] + r[0]['上月交易收益'] + r[0]['上月活动收益'], 2)
+        assert r[0]['上月合计收益'] == round(r[1]['上月跟随收益'] + r[1]['上月交易收益'] + r[1]['上月活动收益'], 2)
 
     def test_05(self):
         """今日收益"""
@@ -107,8 +107,8 @@ class IncomeStatement(StartEnd):
         r = profit(date='jr')
         print(r[0])
         print(r[1])
-        assert r[0]['今日合计收益'] == r[0]['今日跟随收益'] + r[0]['今日交易收益'] + r[0]['今日活动收益']
-        assert r[0]['今日合计收益'] == r[1]['今日跟随收益'] + r[1]['今日交易收益'] + r[1]['今日活动收益']
+        assert r[0]['今日合计收益'] == round(r[0]['今日跟随收益'] + r[0]['今日交易收益'] + r[0]['今日活动收益'], 2)
+        assert r[0]['今日合计收益'] == round(r[1]['今日跟随收益'] + r[1]['今日交易收益'] + r[1]['今日活动收益'], 2)
 
     def test_06(self):
         """近一年收益"""
@@ -116,8 +116,8 @@ class IncomeStatement(StartEnd):
         r = profit(date='jyn')
         print(r[0])
         print(r[1])
-        assert r[0]['近一年合计收益'] == r[0]['近一年跟随收益'] + r[0]['近一年交易收益'] + r[0]['近一年活动收益']
-        assert r[0]['近一年合计收益'] == r[1]['近一年跟随收益'] + r[1]['近一年交易收益'] + r[1]['近一年活动收益']
+        assert r[0]['近一年合计收益'] == round(r[0]['近一年跟随收益'] + r[0]['近一年交易收益'] + r[0]['近一年活动收益'], 2)
+        assert r[0]['近一年合计收益'] == round(r[1]['近一年跟随收益'] + r[1]['近一年交易收益'] + r[1]['近一年活动收益'], 2)
 
     def test_07(self):
         """自定义日期区间的收益"""
@@ -129,9 +129,10 @@ class IncomeStatement(StartEnd):
         a4 = '{}到{}活动收益'.format(diy_fd, diy_ld)
         r = profit(date='diy', diy_fd=diy_fd, diy_ld=diy_ld)
         print(r[0])
-        print(r[1])
-        assert r[0][a1] == r[0][a2] + r[0][a3] + r[0][a4]
-        assert r[0][a1] == r[1][a2] + r[1][a3] + r[1][a4]
+        results1 = r[0][a2] + r[0][a3] + r[0][a4]
+        results2 = r[1][a2] + r[1][a3] + r[1][a4]
+        assert r[0][a1] == round(results1, 2)
+        assert r[0][a1] == round(results2, 2)
 
 
 if __name__ == '__main__':

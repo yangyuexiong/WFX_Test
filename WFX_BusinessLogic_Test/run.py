@@ -33,10 +33,11 @@ with open(report_name, 'wb') as f:
     runner.run(discover)
     f.close()
 
+    # from common.public_func import latest_report, send_mail
+
     # print('查找最新报告')
     # latest_report = latest_report(report_dir)
     # print(latest_report)
-    #
     # print('发送报告到邮箱')
     # send_mail(latest_report)
 

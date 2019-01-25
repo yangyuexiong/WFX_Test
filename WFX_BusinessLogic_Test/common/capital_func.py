@@ -201,7 +201,6 @@ def profit(n=None, date=None, diy_fd=None, diy_ld=None):
             '昨日交易收益': float(trade_income),
             '昨日活动收益': float(activity_income),
         }
-
         profit_title = '昨日收益'
         msg = '昨日-合计收益:{}\n昨日-跟随收益:{}\n昨日-交易收益:{}\n昨日-活动收益:{}\n'
 
@@ -212,7 +211,6 @@ def profit(n=None, date=None, diy_fd=None, diy_ld=None):
             '交易-总收益': float(trade_income),
             '活动-总收益': float(activity_income),
         }
-
         profit_title = '累计收益'
         msg = '累计-总收益:{}\n跟随-总收益:{}\n交易-总收益:{}\n活动-总收益:{}\n'
 
@@ -271,7 +269,10 @@ def profit(n=None, date=None, diy_fd=None, diy_ld=None):
 
     print('{}{}{}'.format('-' * 30, '%s', '-' * 30) % profit_title)
 
-    '''收益明细计算'''
+    '''收益明细计算
+    gsmx//jymx//hdmx:金额集
+    gsmx_sum//jymx_sum//hdmx_sum:金额集总和
+    '''
     gsmx = []
     jymx = []
     hdmx = []
@@ -304,9 +305,6 @@ def profit(n=None, date=None, diy_fd=None, diy_ld=None):
     for h in hdmx:
         hdmx_sum += float(h)
 
-    gsmx_sum = round(gsmx_sum, 2)
-    jymx_sum = round(jymx_sum, 2)
-    hdmx_sum = round(hdmx_sum, 2)
     print(gsmx_sum)
     print(jymx_sum)
     print(hdmx_sum)
