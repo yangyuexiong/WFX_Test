@@ -40,6 +40,6 @@ with open(report_name, 'wb') as f:
     # print(latest_report)
     # print('发送报告到邮箱')
     # send_mail(latest_report)
-
+    #
 if __name__ == '__main__':
     pass
