@@ -55,6 +55,7 @@ def get_user_info(n=None):
 
 # 收益
 def profit(n=None, date=None, diy_fd=None, diy_ld=None):
+    import time
     import datetime
     import calendar
     from datetime import timedelta
@@ -114,7 +115,18 @@ def profit(n=None, date=None, diy_fd=None, diy_ld=None):
 
     if date == 'zr':
 
-        yesterday = now_time - datetime.timedelta(days=1)
+        week = time.localtime()
+        w1 = time.strftime("%A", week)  # 英文显示//Thursday
+        w2 = time.strftime("%w", week)  # 数字显示//4
+        print('{} 星期 {}'.format(w1, w2))
+        print(w1, w2)
+
+        yesterday = ''
+
+        if int(w2) == 1:
+            yesterday = now_time - datetime.timedelta(days=3)
+        else:
+            yesterday = now_time - datetime.timedelta(days=1)
         # print(yesterday.strftime('%Y-%m-%d'))
         day = yesterday.strftime('%Y-%m-%d')
         param_2['start_date'] = day
