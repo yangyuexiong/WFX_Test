@@ -1,0 +1,2061 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>自动化测试报告</title>
+    <meta name="generator" content="HTMLTestRunner 0.8.2.2"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link href="http://libs.baidu.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet">
+    <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+    <script src="http://libs.baidu.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+    
+<style type="text/css" media="screen">
+body        { font-family: Microsoft YaHei,Tahoma,arial,helvetica,sans-serif;padding: 20px; font-size: 80%; }
+table       { font-size: 100%; }
+
+/* -- heading ---------------------------------------------------------------------- */
+.heading {
+    margin-top: 0ex;
+    margin-bottom: 1ex;
+}
+
+.heading .description {
+    margin-top: 4ex;
+    margin-bottom: 6ex;
+}
+
+/* -- report ------------------------------------------------------------------------ */
+#total_row  { font-weight: bold; }
+.passCase   { color: #5cb85c; }
+.failCase   { color: #d9534f; font-weight: bold; }
+.errorCase  { color: #f0ad4e; font-weight: bold; }
+.hiddenRow  { display: none; }
+.testcase   { margin-left: 2em; }
+</style>
+
+</head>
+<body >
+<script language="javascript" type="text/javascript">
+output_list = Array();
+
+/*level 调整增加只显示通过用例的分类 --Findyou
+0:Summary //all hiddenRow
+1:Failed  //pt hiddenRow, ft none
+2:Pass    //pt none, ft hiddenRow
+3:All     //pt none, ft none
+*/
+function showCase(level) {
+    trs = document.getElementsByTagName("tr");
+    for (var i = 0; i < trs.length; i++) {
+        tr = trs[i];
+        id = tr.id;
+        if (id.substr(0,2) == 'ft') {
+            if (level == 2 || level == 0 ) {
+                tr.className = 'hiddenRow';
+            }
+            else {
+                tr.className = '';
+            }
+        }
+        if (id.substr(0,2) == 'pt') {
+            if (level < 2) {
+                tr.className = 'hiddenRow';
+            }
+            else {
+                tr.className = '';
+            }
+        }
+    }
+
+    //加入【详细】切换文字变化 --Findyou
+    detail_class=document.getElementsByClassName('detail');
+	//console.log(detail_class.length)
+	if (level == 3) {
+		for (var i = 0; i < detail_class.length; i++){
+			detail_class[i].innerHTML="收起"
+		}
+	}
+	else{
+			for (var i = 0; i < detail_class.length; i++){
+			detail_class[i].innerHTML="详细"
+		}
+	}
+}
+
+function showClassDetail(cid, count) {
+    var id_list = Array(count);
+    var toHide = 1;
+    for (var i = 0; i < count; i++) {
+        //ID修改 点 为 下划线 -Findyou
+        tid0 = 't' + cid.substr(1) + '_' + (i+1);
+        tid = 'f' + tid0;
+        tr = document.getElementById(tid);
+        if (!tr) {
+            tid = 'p' + tid0;
+            tr = document.getElementById(tid);
+        }
+        id_list[i] = tid;
+        if (tr.className) {
+            toHide = 0;
+        }
+    }
+    for (var i = 0; i < count; i++) {
+        tid = id_list[i];
+        //修改点击无法收起的BUG，加入【详细】切换文字变化 --Findyou
+        if (toHide) {
+            document.getElementById(tid).className = 'hiddenRow';
+            document.getElementById(cid).innerText = "详细"
+        }
+        else {
+            document.getElementById(tid).className = '';
+            document.getElementById(cid).innerText = "收起"
+        }
+    }
+}
+
+function html_escape(s) {
+    s = s.replace(/&/g,'&amp;');
+    s = s.replace(/</g,'&lt;');
+    s = s.replace(/>/g,'&gt;');
+    return s;
+}
+</script>
+<div class='heading'>
+<h1 style="font-family: Microsoft YaHei">自动化测试报告</h1>
+<p class='attribute'><strong>测试人员 : </strong> ShaHeTop-Almighty-ares</p>
+<p class='attribute'><strong>开始时间 : </strong> 2019-02-13 13:56:22</p>
+<p class='attribute'><strong>合计耗时 : </strong> 0:00:31.494761</p>
+<p class='attribute'><strong>测试结果 : </strong> 共 77，通过 73，失败 2，错误 2，通过率= 94.81%</p>
+
+<p class='description'>回归测试</p>
+</div>
+
+
+
+<p id='show_detail_line'>
+<a class="btn btn-primary" href='javascript:showCase(0)'>概要【 94.81% 】</a>
+<a class="btn btn-danger" href='javascript:showCase(1)'>失败【 2 】</a>
+<a class="btn btn-success" href='javascript:showCase(2)'>通过【 73 】</a>
+<a class="btn btn-info" href='javascript:showCase(3)'>所有【 77 】</a>
+</p>
+<table id='result_table' class="table table-condensed table-bordered table-hover">
+<colgroup>
+<col align='left' />
+<col align='right' />
+<col align='right' />
+<col align='right' />
+<col align='right' />
+<col align='right' />
+</colgroup>
+<tr id='header_row' class="text-center success" style="font-weight: bold;font-size: 14px;">
+    <td>用例集/测试用例</td>
+    <td>总计</td>
+    <td>通过</td>
+    <td>失败</td>
+    <td>错误</td>
+    <td>详细</td>
+</tr>
+
+<tr class='passClass warning'>
+    <td>test_01_Register.RegisterInit: 注册__init__</td>
+    <td class="text-center">1</td>
+    <td class="text-center">1</td>
+    <td class="text-center">0</td>
+    <td class="text-center">0</td>
+    <td class="text-center"><a href="javascript:showClassDetail('c1',1)" class="detail" id='c1'>详细</a></td>
+</tr>
+
+<tr id='pt1_1' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_register99: 清除test_register6数据</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt1_1' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt1_1'>通过</button>
+    <div id='div_pt1_1' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt1_1' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt1_1'>通过</button>
+    <div id='div_pt1_1' class="collapse in">
+    <pre>
+    
+pt1_1: ======测试开始======
+清除数据----ok
+======测试结束======
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr class='passClass warning'>
+    <td>test_01_Register.RegisterTest</td>
+    <td class="text-center">6</td>
+    <td class="text-center">6</td>
+    <td class="text-center">0</td>
+    <td class="text-center">0</td>
+    <td class="text-center"><a href="javascript:showClassDetail('c2',6)" class="detail" id='c2'>详细</a></td>
+</tr>
+
+<tr id='pt2_1' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_register1: 验证错误</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt2_1' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt2_1'>通过</button>
+    <div id='div_pt2_1' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt2_1' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt2_1'>通过</button>
+    <div id='div_pt2_1' class="collapse in">
+    <pre>
+    
+pt2_1: ======测试开始======
+======测试结束======
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt2_2' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_register2: 手机号已存在</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt2_2' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt2_2'>通过</button>
+    <div id='div_pt2_2' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt2_2' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt2_2'>通过</button>
+    <div id='div_pt2_2' class="collapse in">
+    <pre>
+    
+pt2_2: ======测试开始======
+======测试结束======
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt2_3' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_register3: 邮箱已存在</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt2_3' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt2_3'>通过</button>
+    <div id='div_pt2_3' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt2_3' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt2_3'>通过</button>
+    <div id='div_pt2_3' class="collapse in">
+    <pre>
+    
+pt2_3: ======测试开始======
+======测试结束======
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt2_4' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_register4: 不符合规则的密码</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt2_4' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt2_4'>通过</button>
+    <div id='div_pt2_4' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt2_4' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt2_4'>通过</button>
+    <div id='div_pt2_4' class="collapse in">
+    <pre>
+    
+pt2_4: ======测试开始======
+ea2d908de07a36d8786823fa3c753066
+======测试结束======
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt2_5' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_register5: 密码为空</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt2_5' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt2_5'>通过</button>
+    <div id='div_pt2_5' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt2_5' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt2_5'>通过</button>
+    <div id='div_pt2_5' class="collapse in">
+    <pre>
+    
+pt2_5: ======测试开始======
+e941b8154e34f999a7ecb94ddc34c4a5
+======测试结束======
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt2_6' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_register6: 不符合规则的交易密码</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt2_6' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt2_6'>通过</button>
+    <div id='div_pt2_6' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt2_6' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt2_6'>通过</button>
+    <div id='div_pt2_6' class="collapse in">
+    <pre>
+    
+pt2_6: ======测试开始======
+======测试结束======
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr class='passClass warning'>
+    <td>test_02_Login.LoginTest: 登录</td>
+    <td class="text-center">4</td>
+    <td class="text-center">4</td>
+    <td class="text-center">0</td>
+    <td class="text-center">0</td>
+    <td class="text-center"><a href="javascript:showClassDetail('c3',4)" class="detail" id='c3'>详细</a></td>
+</tr>
+
+<tr id='pt3_1' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_login1: 正确验证码登录</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt3_1' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt3_1'>通过</button>
+    <div id='div_pt3_1' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt3_1' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt3_1'>通过</button>
+    <div id='div_pt3_1' class="collapse in">
+    <pre>
+    
+pt3_1: ======测试开始======
+======测试结束======
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt3_2' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_login2: 错误验证码登录</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt3_2' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt3_2'>通过</button>
+    <div id='div_pt3_2' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt3_2' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt3_2'>通过</button>
+    <div id='div_pt3_2' class="collapse in">
+    <pre>
+    
+pt3_2: ======测试开始======
+======测试结束======
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt3_3' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_login3: 正确密码登录</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt3_3' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt3_3'>通过</button>
+    <div id='div_pt3_3' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt3_3' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt3_3'>通过</button>
+    <div id='div_pt3_3' class="collapse in">
+    <pre>
+    
+pt3_3: ======测试开始======
+======测试结束======
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt3_4' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_login4: 错误登录密码</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt3_4' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt3_4'>通过</button>
+    <div id='div_pt3_4' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt3_4' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt3_4'>通过</button>
+    <div id='div_pt3_4' class="collapse in">
+    <pre>
+    
+pt3_4: ======测试开始======
+======测试结束======
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr class='errorClass warning'>
+    <td>unittest.loader._FailedTest</td>
+    <td class="text-center">1</td>
+    <td class="text-center">0</td>
+    <td class="text-center">0</td>
+    <td class="text-center">1</td>
+    <td class="text-center"><a href="javascript:showClassDetail('c4',1)" class="detail" id='c4'>详细</a></td>
+</tr>
+
+<tr id='ft4_1' class='none'>
+    <td class='errorCase'><div class='testcase'>test_03_BackgroundRecharge</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft4_1' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft4_1'>错误</button>
+    <div id='div_ft4_1' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft4_1' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft4_1'>错误</button>
+    <div id='div_ft4_1' class="collapse in">
+    <pre>
+    
+ft4_1: ImportError: Failed to import test module: test_03_BackgroundRecharge
+Traceback (most recent call last):
+  File "/Users/yangyuexiong/Library/Python/3.6/lib/python/site-packages/selenium/webdriver/common/service.py", line 74, in start
+    stdout=self.log_file, stderr=self.log_file)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/subprocess.py", line 709, in __init__
+    restore_signals, start_new_session)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/subprocess.py", line 1344, in _execute_child
+    raise child_exception_type(errno_num, err_msg, err_filename)
+FileNotFoundError: [Errno 2] No such file or directory: '../phantomjs-2.1.1-macosx/bin/phantomjs': '../phantomjs-2.1.1-macosx/bin/phantomjs'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/unittest/loader.py", line 428, in _find_test_path
+    module = self._get_module_from_name(name)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/unittest/loader.py", line 369, in _get_module_from_name
+    __import__(name)
+  File "/Users/yangyuexiong/Desktop/WFX_Test/WFX_BusinessLogic_Test/case/test_03_BackgroundRecharge.py", line 16, in &lt;module&gt;
+    driver = webdriver.PhantomJS(executable_path='../phantomjs-2.1.1-macosx/bin/phantomjs')
+  File "/Users/yangyuexiong/Library/Python/3.6/lib/python/site-packages/selenium/webdriver/phantomjs/webdriver.py", line 52, in __init__
+    self.service.start()
+  File "/Users/yangyuexiong/Library/Python/3.6/lib/python/site-packages/selenium/webdriver/common/service.py", line 81, in start
+    os.path.basename(self.path), self.start_error_message)
+selenium.common.exceptions.WebDriverException: Message: 'phantomjs' executable needs to be in PATH. 
+
+
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr class='failClass warning'>
+    <td>test_04_Settings_name_card.SettingTest1: 设置项测试</td>
+    <td class="text-center">9</td>
+    <td class="text-center">7</td>
+    <td class="text-center">2</td>
+    <td class="text-center">0</td>
+    <td class="text-center"><a href="javascript:showClassDetail('c5',9)" class="detail" id='c5'>详细</a></td>
+</tr>
+
+<tr id='ft5_1' class='none'>
+    <td class='failCase'><div class='testcase'>test_bankcards1: 中国银行卡绑定</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft5_1' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft5_1'>失败</button>
+    <div id='div_ft5_1' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft5_1' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft5_1'>失败</button>
+    <div id='div_ft5_1' class="collapse in">
+    <pre>
+    
+ft5_1: ======测试开始======
+{'code': 30002, 'message': '你的银行卡持卡人信息不正确(请检查姓名、身份证、银行卡、预留电话是否一致)'}
+======测试结束======
+Traceback (most recent call last):
+  File "/Users/yangyuexiong/Desktop/WFX_Test/WFX_BusinessLogic_Test/case/test_04_Settings_name_card.py", line 91, in test_bankcards1
+    assert_json(lo.json(), 'code', 0)
+  File "/Users/yangyuexiong/Desktop/WFX_Test/WFX_BusinessLogic_Test/common/public_func.py", line 20, in assert_json
+    assert json_obj[key] == v
+AssertionError
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='ft5_2' class='none'>
+    <td class='failCase'><div class='testcase'>test_bankcards2: 已绑定</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft5_2' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft5_2'>失败</button>
+    <div id='div_ft5_2' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft5_2' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft5_2'>失败</button>
+    <div id='div_ft5_2' class="collapse in">
+    <pre>
+    
+ft5_2: ======测试开始======
+======测试结束======
+Traceback (most recent call last):
+  File "/Users/yangyuexiong/Desktop/WFX_Test/WFX_BusinessLogic_Test/case/test_04_Settings_name_card.py", line 101, in test_bankcards2
+    assert_json(lo.json(), 'code', 10000)
+  File "/Users/yangyuexiong/Desktop/WFX_Test/WFX_BusinessLogic_Test/common/public_func.py", line 20, in assert_json
+    assert json_obj[key] == v
+AssertionError
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt5_3' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_bankcards3: 解绑</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt5_3' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt5_3'>通过</button>
+    <div id='div_pt5_3' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt5_3' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt5_3'>通过</button>
+    <div id='div_pt5_3' class="collapse in">
+    <pre>
+    
+pt5_3: ======测试开始======
+======测试结束======
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt5_4' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_bankcards4: 银行卡信息错误</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt5_4' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt5_4'>通过</button>
+    <div id='div_pt5_4' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt5_4' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt5_4'>通过</button>
+    <div id='div_pt5_4' class="collapse in">
+    <pre>
+    
+pt5_4: ======测试开始======
+======测试结束======
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt5_5' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_bankcards5: 银行卡为空</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt5_5' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt5_5'>通过</button>
+    <div id='div_pt5_5' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt5_5' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt5_5'>通过</button>
+    <div id='div_pt5_5' class="collapse in">
+    <pre>
+    
+pt5_5: ======测试开始======
+======测试结束======
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt5_6' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_bankcards6: 手机号为空</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt5_6' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt5_6'>通过</button>
+    <div id='div_pt5_6' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt5_6' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt5_6'>通过</button>
+    <div id='div_pt5_6' class="collapse in">
+    <pre>
+    
+pt5_6: ======测试开始======
+======测试结束======
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt5_7' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_nickname1: 修改昵称</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt5_7' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt5_7'>通过</button>
+    <div id='div_pt5_7' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt5_7' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt5_7'>通过</button>
+    <div id='div_pt5_7' class="collapse in">
+    <pre>
+    
+pt5_7: ======测试开始======
+{'code': 0, 'message': 'ok'}
+======测试结束======
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt5_8' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_nickname2: 违规昵称</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt5_8' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt5_8'>通过</button>
+    <div id='div_pt5_8' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt5_8' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt5_8'>通过</button>
+    <div id='div_pt5_8' class="collapse in">
+    <pre>
+    
+pt5_8: ======测试开始======
+======测试结束======
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt5_9' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_nickname3: 昵称为空</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt5_9' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt5_9'>通过</button>
+    <div id='div_pt5_9' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt5_9' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt5_9'>通过</button>
+    <div id='div_pt5_9' class="collapse in">
+    <pre>
+    
+pt5_9: ======测试开始======
+======测试结束======
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr class='passClass warning'>
+    <td>test_05_Settings_lo_pwd.SettingTest2: 用户密码测试</td>
+    <td class="text-center">12</td>
+    <td class="text-center">12</td>
+    <td class="text-center">0</td>
+    <td class="text-center">0</td>
+    <td class="text-center"><a href="javascript:showClassDetail('c6',12)" class="detail" id='c6'>详细</a></td>
+</tr>
+
+<tr id='pt6_1' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_login_pwd1: 登录密码修改</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt6_1' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt6_1'>通过</button>
+    <div id='div_pt6_1' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt6_1' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt6_1'>通过</button>
+    <div id='div_pt6_1' class="collapse in">
+    <pre>
+    
+pt6_1: ======测试开始======
+======测试结束======
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt6_2' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_login_pwd2: 还原密码便于下次再次执行用例</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt6_2' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt6_2'>通过</button>
+    <div id='div_pt6_2' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt6_2' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt6_2'>通过</button>
+    <div id='div_pt6_2' class="collapse in">
+    <pre>
+    
+pt6_2: ======测试开始======
+======测试结束======
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt6_3' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_login_pwd3: 原密码错误</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt6_3' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt6_3'>通过</button>
+    <div id='div_pt6_3' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt6_3' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt6_3'>通过</button>
+    <div id='div_pt6_3' class="collapse in">
+    <pre>
+    
+pt6_3: ======测试开始======
+======测试结束======
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt6_4' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_login_pwd4: 原密码为空</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt6_4' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt6_4'>通过</button>
+    <div id='div_pt6_4' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt6_4' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt6_4'>通过</button>
+    <div id='div_pt6_4' class="collapse in">
+    <pre>
+    
+pt6_4: ======测试开始======
+======测试结束======
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt6_5' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_login_pwd5: 两次新密码不一致</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt6_5' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt6_5'>通过</button>
+    <div id='div_pt6_5' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt6_5' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt6_5'>通过</button>
+    <div id='div_pt6_5' class="collapse in">
+    <pre>
+    
+pt6_5: ======测试开始======
+======测试结束======
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt6_6' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_login_pwd6: 新密码不规范</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt6_6' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt6_6'>通过</button>
+    <div id='div_pt6_6' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt6_6' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt6_6'>通过</button>
+    <div id='div_pt6_6' class="collapse in">
+    <pre>
+    
+pt6_6: ======测试开始======
+======测试结束======
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt6_7' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_login_pwd7: 新密码为空</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt6_7' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt6_7'>通过</button>
+    <div id='div_pt6_7' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt6_7' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt6_7'>通过</button>
+    <div id='div_pt6_7' class="collapse in">
+    <pre>
+    
+pt6_7: ======测试开始======
+======测试结束======
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt6_8' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_login_pwd8: 全部为空</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt6_8' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt6_8'>通过</button>
+    <div id='div_pt6_8' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt6_8' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt6_8'>通过</button>
+    <div id='div_pt6_8' class="collapse in">
+    <pre>
+    
+pt6_8: ======测试开始======
+======测试结束======
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt6_9' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_r_pwd1: 重置登录密码</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt6_9' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt6_9'>通过</button>
+    <div id='div_pt6_9' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt6_9' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt6_9'>通过</button>
+    <div id='div_pt6_9' class="collapse in">
+    <pre>
+    
+pt6_9: ======测试开始======
+======测试结束======
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt6_10' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_r_pwd2: 重置的密码不规范</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt6_10' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt6_10'>通过</button>
+    <div id='div_pt6_10' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt6_10' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt6_10'>通过</button>
+    <div id='div_pt6_10' class="collapse in">
+    <pre>
+    
+pt6_10: ======测试开始======
+======测试结束======
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt6_11' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_r_pwd3: 密码为空</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt6_11' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt6_11'>通过</button>
+    <div id='div_pt6_11' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt6_11' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt6_11'>通过</button>
+    <div id='div_pt6_11' class="collapse in">
+    <pre>
+    
+pt6_11: ======测试开始======
+======测试结束======
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt6_12' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_r_pwd4: 重置登录密码 错误验证码</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt6_12' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt6_12'>通过</button>
+    <div id='div_pt6_12' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt6_12' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt6_12'>通过</button>
+    <div id='div_pt6_12' class="collapse in">
+    <pre>
+    
+pt6_12: ======测试开始======
+======测试结束======
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr class='passClass warning'>
+    <td>test_06_Settings_deal_pwd.SettingTest3: 交易密码测试</td>
+    <td class="text-center">6</td>
+    <td class="text-center">6</td>
+    <td class="text-center">0</td>
+    <td class="text-center">0</td>
+    <td class="text-center"><a href="javascript:showClassDetail('c7',6)" class="detail" id='c7'>详细</a></td>
+</tr>
+
+<tr id='pt7_1' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_deal_pwd1: 修改交易密码</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt7_1' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt7_1'>通过</button>
+    <div id='div_pt7_1' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt7_1' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt7_1'>通过</button>
+    <div id='div_pt7_1' class="collapse in">
+    <pre>
+    
+pt7_1: ======测试开始======
+======测试结束======
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt7_2' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_deal_pwd2: 还原</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt7_2' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt7_2'>通过</button>
+    <div id='div_pt7_2' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt7_2' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt7_2'>通过</button>
+    <div id='div_pt7_2' class="collapse in">
+    <pre>
+    
+pt7_2: ======测试开始======
+======测试结束======
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt7_3' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_deal_pwd3: 原密码错误</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt7_3' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt7_3'>通过</button>
+    <div id='div_pt7_3' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt7_3' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt7_3'>通过</button>
+    <div id='div_pt7_3' class="collapse in">
+    <pre>
+    
+pt7_3: ======测试开始======
+======测试结束======
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt7_4' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_deal_pwd4: 新密码不符合规则</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt7_4' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt7_4'>通过</button>
+    <div id='div_pt7_4' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt7_4' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt7_4'>通过</button>
+    <div id='div_pt7_4' class="collapse in">
+    <pre>
+    
+pt7_4: ======测试开始======
+======测试结束======
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt7_5' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_deal_pwd5: 新密码为空</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt7_5' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt7_5'>通过</button>
+    <div id='div_pt7_5' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt7_5' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt7_5'>通过</button>
+    <div id='div_pt7_5' class="collapse in">
+    <pre>
+    
+pt7_5: ======测试开始======
+======测试结束======
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt7_6' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_deal_pwd6: 全部为空</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt7_6' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt7_6'>通过</button>
+    <div id='div_pt7_6' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt7_6' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt7_6'>通过</button>
+    <div id='div_pt7_6' class="collapse in">
+    <pre>
+    
+pt7_6: ======测试开始======
+======测试结束======
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr class='passClass warning'>
+    <td>test_07_Settings_MT5_pwd.SettingTest4: MT5密码测试</td>
+    <td class="text-center">7</td>
+    <td class="text-center">7</td>
+    <td class="text-center">0</td>
+    <td class="text-center">0</td>
+    <td class="text-center"><a href="javascript:showClassDetail('c8',7)" class="detail" id='c8'>详细</a></td>
+</tr>
+
+<tr id='pt8_1' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_r_mt5_pwd1: 修改MT5密码</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt8_1' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt8_1'>通过</button>
+    <div id='div_pt8_1' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt8_1' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt8_1'>通过</button>
+    <div id='div_pt8_1' class="collapse in">
+    <pre>
+    
+pt8_1: ======测试开始======
+======测试结束======
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt8_2' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_r_mt5_pwd2: 还原</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt8_2' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt8_2'>通过</button>
+    <div id='div_pt8_2' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt8_2' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt8_2'>通过</button>
+    <div id='div_pt8_2' class="collapse in">
+    <pre>
+    
+pt8_2: ======测试开始======
+======测试结束======
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt8_3' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_r_mt5_pwd3: 原密码错误</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt8_3' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt8_3'>通过</button>
+    <div id='div_pt8_3' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt8_3' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt8_3'>通过</button>
+    <div id='div_pt8_3' class="collapse in">
+    <pre>
+    
+pt8_3: ======测试开始======
+======测试结束======
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt8_4' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_r_mt5_pwd4: 原密码为空</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt8_4' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt8_4'>通过</button>
+    <div id='div_pt8_4' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt8_4' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt8_4'>通过</button>
+    <div id='div_pt8_4' class="collapse in">
+    <pre>
+    
+pt8_4: ======测试开始======
+======测试结束======
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt8_5' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_r_mt5_pwd5: 新密码为空</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt8_5' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt8_5'>通过</button>
+    <div id='div_pt8_5' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt8_5' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt8_5'>通过</button>
+    <div id='div_pt8_5' class="collapse in">
+    <pre>
+    
+pt8_5: ======测试开始======
+======测试结束======
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt8_6' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_r_mt5_pwd6: 新密码两次不一致</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt8_6' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt8_6'>通过</button>
+    <div id='div_pt8_6' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt8_6' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt8_6'>通过</button>
+    <div id='div_pt8_6' class="collapse in">
+    <pre>
+    
+pt8_6: ======测试开始======
+======测试结束======
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt8_7' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_r_mt5_pwd7: 新密码不符合规则</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt8_7' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt8_7'>通过</button>
+    <div id='div_pt8_7' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt8_7' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt8_7'>通过</button>
+    <div id='div_pt8_7' class="collapse in">
+    <pre>
+    
+pt8_7: ======测试开始======
+======测试结束======
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr class='passClass warning'>
+    <td>test_07_Settings_MT5_pwd.SettingTest4_1</td>
+    <td class="text-center">4</td>
+    <td class="text-center">4</td>
+    <td class="text-center">0</td>
+    <td class="text-center">0</td>
+    <td class="text-center"><a href="javascript:showClassDetail('c9',4)" class="detail" id='c9'>详细</a></td>
+</tr>
+
+<tr id='pt9_1' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_reset_mt5_pwd1: 重置mt5密码</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt9_1' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt9_1'>通过</button>
+    <div id='div_pt9_1' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt9_1' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt9_1'>通过</button>
+    <div id='div_pt9_1' class="collapse in">
+    <pre>
+    
+pt9_1: ======测试开始======
+======测试结束======
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt9_2' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_reset_mt5_pwd2: 验证码错误</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt9_2' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt9_2'>通过</button>
+    <div id='div_pt9_2' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt9_2' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt9_2'>通过</button>
+    <div id='div_pt9_2' class="collapse in">
+    <pre>
+    
+pt9_2: ======测试开始======
+======测试结束======
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt9_3' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_reset_mt5_pwd3: 使用其他手机进行修改</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt9_3' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt9_3'>通过</button>
+    <div id='div_pt9_3' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt9_3' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt9_3'>通过</button>
+    <div id='div_pt9_3' class="collapse in">
+    <pre>
+    
+pt9_3: ======测试开始======
+{'message': '修改密码失败', 'code': 60000, 'data': None}
+======测试结束======
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt9_4' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_reset_mt5_pwd4: 密码为空/不符合规则</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt9_4' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt9_4'>通过</button>
+    <div id='div_pt9_4' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt9_4' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt9_4'>通过</button>
+    <div id='div_pt9_4' class="collapse in">
+    <pre>
+    
+pt9_4: ======测试开始======
+======测试结束======
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr class='errorClass warning'>
+    <td>test_08_Follow.SetAnalyst: 分析师收益设置</td>
+    <td class="text-center">1</td>
+    <td class="text-center">0</td>
+    <td class="text-center">0</td>
+    <td class="text-center">1</td>
+    <td class="text-center"><a href="javascript:showClassDetail('c10',1)" class="detail" id='c10'>详细</a></td>
+</tr>
+
+<tr id='ft10_1' class='none'>
+    <td class='errorCase'><div class='testcase'>test_set_analyst1: 登录分析师后台-设置收益</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft10_1' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft10_1'>错误</button>
+    <div id='div_ft10_1' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft10_1' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft10_1'>错误</button>
+    <div id='div_ft10_1' class="collapse in">
+    <pre>
+    
+ft10_1: ======测试开始======
+======测试结束======
+Traceback (most recent call last):
+  File "/Users/yangyuexiong/Desktop/WFX_Test/WFX_BusinessLogic_Test/case/test_08_Follow.py", line 109, in test_set_analyst1
+    analyst_p = set_dict_s(275, 30)
+  File "/Users/yangyuexiong/Desktop/WFX_Test/WFX_BusinessLogic_Test/case/test_08_Follow.py", line 52, in set_dict_s
+    l1 = soup.select('input[class="form-control analystProfitDate"]')[0]
+IndexError: list index out of range
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr class='passClass warning'>
+    <td>test_10_Interturn.InterturnTest: 资金互转</td>
+    <td class="text-center">13</td>
+    <td class="text-center">13</td>
+    <td class="text-center">0</td>
+    <td class="text-center">0</td>
+    <td class="text-center"><a href="javascript:showClassDetail('c11',13)" class="detail" id='c11'>详细</a></td>
+</tr>
+
+<tr id='pt11_1' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_interturn: 全部平仓</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt11_1' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt11_1'>通过</button>
+    <div id='div_pt11_1' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt11_1' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt11_1'>通过</button>
+    <div id='div_pt11_1' class="collapse in">
+    <pre>
+    
+pt11_1: ======测试开始======
+[]
+====持仓为空====
+======测试结束======
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt11_2' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_interturn0: 资金互转[跟随->MT5]</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt11_2' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt11_2'>通过</button>
+    <div id='div_pt11_2' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt11_2' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt11_2'>通过</button>
+    <div id='div_pt11_2' class="collapse in">
+    <pre>
+    
+pt11_2: ======测试开始======
+{'message': 'success', 'code': 0, 'data': {'mt5_canWithdraw': 118279.15, 'canWithdraw': 421}}
+MT5余额:118279.15 = 118269.15 + 10.0
+跟随余额:421.0 = 431.0 - 10.0
+======测试结束======
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt11_3' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_interturn1: 资金互转[MT5->跟随]</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt11_3' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt11_3'>通过</button>
+    <div id='div_pt11_3' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt11_3' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt11_3'>通过</button>
+    <div id='div_pt11_3' class="collapse in">
+    <pre>
+    
+pt11_3: ======测试开始======
+{'message': 'success', 'code': 0, 'data': {'mt5_canWithdraw': 118269.15, 'canWithdraw': 431}}
+跟随余额:431.0 = 421.0 + 10.0
+MT5余额:118269.15 = 118279.15 - 10.0
+======测试结束======
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt11_4' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_interturn10: 转入金额为空[跟随->MT5]</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt11_4' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt11_4'>通过</button>
+    <div id='div_pt11_4' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt11_4' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt11_4'>通过</button>
+    <div id='div_pt11_4' class="collapse in">
+    <pre>
+    
+pt11_4: ======测试开始======
+{'message': '转出金额必须大于0', 'code': 40004, 'data': None}
+======测试结束======
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt11_5' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_interturn11: 转入金额为空[MT5->跟随]</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt11_5' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt11_5'>通过</button>
+    <div id='div_pt11_5' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt11_5' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt11_5'>通过</button>
+    <div id='div_pt11_5' class="collapse in">
+    <pre>
+    
+pt11_5: ======测试开始======
+{'message': '转出金额必须大于0', 'code': 40004, 'data': None}
+======测试结束======
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt11_6' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_interturn2: 转入金额大于余额[跟随->MT5]</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt11_6' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt11_6'>通过</button>
+    <div id='div_pt11_6' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt11_6' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt11_6'>通过</button>
+    <div id='div_pt11_6' class="collapse in">
+    <pre>
+    
+pt11_6: ======测试开始======
+{'message': '转出金额不能大于可转出余额', 'code': 51006, 'data': None}
+======测试结束======
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt11_7' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_interturn3: 转入金额大于余额[MT5->跟随]</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt11_7' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt11_7'>通过</button>
+    <div id='div_pt11_7' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt11_7' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt11_7'>通过</button>
+    <div id='div_pt11_7' class="collapse in">
+    <pre>
+    
+pt11_7: ======测试开始======
+{'message': '转出金额不能大于可转出余额', 'code': 51006, 'data': None}
+======测试结束======
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt11_8' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_interturn4: 转入负数[跟随->MT5]</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt11_8' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt11_8'>通过</button>
+    <div id='div_pt11_8' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt11_8' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt11_8'>通过</button>
+    <div id='div_pt11_8' class="collapse in">
+    <pre>
+    
+pt11_8: ======测试开始======
+{'message': '转出金额必须大于0', 'code': 40004, 'data': None}
+======测试结束======
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt11_9' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_interturn5: 转入负数[MT5->跟随]</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt11_9' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt11_9'>通过</button>
+    <div id='div_pt11_9' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt11_9' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt11_9'>通过</button>
+    <div id='div_pt11_9' class="collapse in">
+    <pre>
+    
+pt11_9: ======测试开始======
+{'message': '转出金额必须大于0', 'code': 40004, 'data': None}
+======测试结束======
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt11_10' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_interturn6: 转入绝对值大于余额负数[跟随->MT5]</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt11_10' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt11_10'>通过</button>
+    <div id='div_pt11_10' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt11_10' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt11_10'>通过</button>
+    <div id='div_pt11_10' class="collapse in">
+    <pre>
+    
+pt11_10: ======测试开始======
+{'message': '转出金额必须大于0', 'code': 40004, 'data': None}
+======测试结束======
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt11_11' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_interturn7: 转入绝对值大于余额负数[MT5->跟随]</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt11_11' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt11_11'>通过</button>
+    <div id='div_pt11_11' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt11_11' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt11_11'>通过</button>
+    <div id='div_pt11_11' class="collapse in">
+    <pre>
+    
+pt11_11: ======测试开始======
+{'message': '转出金额必须大于0', 'code': 40004, 'data': None}
+======测试结束======
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt11_12' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_interturn8: 字符转入[跟随->MT5]</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt11_12' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt11_12'>通过</button>
+    <div id='div_pt11_12' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt11_12' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt11_12'>通过</button>
+    <div id='div_pt11_12' class="collapse in">
+    <pre>
+    
+pt11_12: ======测试开始======
+{'message': '转出金额必须大于0', 'code': 40004, 'data': None}
+======测试结束======
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt11_13' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_interturn9: 字符转入[MT5->跟随]</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt11_13' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt11_13'>通过</button>
+    <div id='div_pt11_13' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt11_13' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt11_13'>通过</button>
+    <div id='div_pt11_13' class="collapse in">
+    <pre>
+    
+pt11_13: ======测试开始======
+{'message': '转出金额必须大于0', 'code': 40004, 'data': None}
+======测试结束======
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr class='passClass warning'>
+    <td>test_11_Count_v2_5_.IncomeStatement</td>
+    <td class="text-center">7</td>
+    <td class="text-center">7</td>
+    <td class="text-center">0</td>
+    <td class="text-center">0</td>
+    <td class="text-center"><a href="javascript:showClassDetail('c12',7)" class="detail" id='c12'>详细</a></td>
+</tr>
+
+<tr id='pt12_1' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_01: 昨日合计收益</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt12_1' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt12_1'>通过</button>
+    <div id='div_pt12_1' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt12_1' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt12_1'>通过</button>
+    <div id='div_pt12_1' class="collapse in">
+    <pre>
+    
+pt12_1: ======测试开始======
+Wednesday 星期 3
+Wednesday 3
+------------------------------昨日收益------------------------------
+跟随收益金额列表: []
+交易收益金额列表: []
+活动收益金额列表: []
+0
+0
+0
+{'昨日合计收益': 0.0, '昨日跟随收益': 0.0, '昨日交易收益': 0.0, '昨日活动收益': 0.0}
+{'昨日跟随收益': 0, '昨日交易收益': 0, '昨日活动收益': 0}
+======测试结束======
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt12_2' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_02: 累计-总收益</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt12_2' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt12_2'>通过</button>
+    <div id='div_pt12_2' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt12_2' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt12_2'>通过</button>
+    <div id='div_pt12_2' class="collapse in">
+    <pre>
+    
+pt12_2: ======测试开始======
+------------------------------累计收益------------------------------
+跟随收益金额列表: ['46.41', '3.93', '3.30', '-9.53', '-13.53', '8.91', '24.98', '7.20', '8.47', '16.61', '3.00', '0.93']
+交易收益金额列表: [340, 30, 7, -17, -35, -14, -6, -6, 0, -140, 2, -47, -670, -220, 79, 60, 0, -20, 7, 7, 7, -6, -78, -14, -56, -7, -125, 1920, -38, -580, -740, -220]
+活动收益金额列表: ['5.00', '15.00']
+100.68
+-580.0
+20.0
+{'累计-总收益': -459.32, '跟随-总收益': 100.68, '交易-总收益': -580.0, '活动-总收益': 20.0}
+{'跟单收益-总和': 100.68, '交易收益-总和': -580.0, '活动获得奖金-总和': 20.0}
+======测试结束======
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt12_3' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_03: 本月收益</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt12_3' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt12_3'>通过</button>
+    <div id='div_pt12_3' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt12_3' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt12_3'>通过</button>
+    <div id='div_pt12_3' class="collapse in">
+    <pre>
+    
+pt12_3: ======测试开始======
+------------------------------本月收益------------------------------
+跟随收益金额列表: []
+交易收益金额列表: []
+活动收益金额列表: []
+0
+0
+0
+{'本月合计收益': 0.0, '本月跟随收益': 0.0, '本月交易收益': 0.0, '本月活动收益': 0.0}
+{'本月跟随收益': 0, '本月交易收益': 0, '本月活动收益': 0}
+======测试结束======
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt12_4' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_04: 上月收益</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt12_4' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt12_4'>通过</button>
+    <div id='div_pt12_4' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt12_4' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt12_4'>通过</button>
+    <div id='div_pt12_4' class="collapse in">
+    <pre>
+    
+pt12_4: ======测试开始======
+------------------------------上月收益------------------------------
+跟随收益金额列表: ['46.41', '3.93', '3.30', '-9.53', '-13.53', '8.91', '24.98', '7.20', '8.47', '16.61', '3.00', '0.93']
+交易收益金额列表: [340, 30, 7, -17, -35, -14, -6, -6, 0, -140, 2, -47, -670, -220, 79, 60, 0, -20, 7, 7, 7, -6, -78, -14, -56, -7, -125, 1920, -38, -580, -740, -220]
+活动收益金额列表: ['5.00', '15.00']
+100.68
+-580.0
+20.0
+{'上月合计收益': -459.32, '上月跟随收益': 100.68, '上月交易收益': -580.0, '上月活动收益': 20.0}
+{'上月跟随收益': 100.68, '上月交易收益': -580.0, '上月活动收益': 20.0}
+======测试结束======
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt12_5' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_05: 今日收益</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt12_5' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt12_5'>通过</button>
+    <div id='div_pt12_5' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt12_5' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt12_5'>通过</button>
+    <div id='div_pt12_5' class="collapse in">
+    <pre>
+    
+pt12_5: ======测试开始======
+------------------------------今日收益------------------------------
+跟随收益金额列表: []
+交易收益金额列表: []
+活动收益金额列表: []
+0
+0
+0
+{'今日合计收益': 0.0, '今日跟随收益': 0.0, '今日交易收益': 0.0, '今日活动收益': 0.0}
+{'今日跟随收益': 0, '今日交易收益': 0, '今日活动收益': 0}
+======测试结束======
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt12_6' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_06: 近一年收益</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt12_6' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt12_6'>通过</button>
+    <div id='div_pt12_6' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt12_6' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt12_6'>通过</button>
+    <div id='div_pt12_6' class="collapse in">
+    <pre>
+    
+pt12_6: ======测试开始======
+------------------------------近一年收益------------------------------
+跟随收益金额列表: ['46.41', '3.93', '3.30', '-9.53', '-13.53', '8.91', '24.98', '7.20', '8.47', '16.61', '3.00', '0.93']
+交易收益金额列表: [340, 30, 7, -17, -35, -14, -6, -6, 0, -140, 2, -47, -670, -220, 79, 60, 0, -20, 7, 7, 7, -6, -78, -14, -56, -7, -125, 1920, -38, -580, -740, -220]
+活动收益金额列表: ['5.00', '15.00']
+100.68
+-580.0
+20.0
+{'近一年合计收益': -459.32, '近一年跟随收益': 100.68, '近一年交易收益': -580.0, '近一年活动收益': 20.0}
+{'近一年跟随收益': 100.68, '近一年交易收益': -580.0, '近一年活动收益': 20.0}
+======测试结束======
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt12_7' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_07: 自定义日期区间的收益</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt12_7' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt12_7'>通过</button>
+    <div id='div_pt12_7' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt12_7' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt12_7'>通过</button>
+    <div id='div_pt12_7' class="collapse in">
+    <pre>
+    
+pt12_7: ======测试开始======
+------------------------------2019-01-11到2019-01-23收益------------------------------
+跟随收益金额列表: ['-13.53', '8.91', '24.98', '7.20', '8.47', '16.61', '3.00', '0.93']
+交易收益金额列表: [340, 30, 7, -17, -35, -14, -6, -6, 0, -140, 2, -47, -670, -220, 79, 60, 0, -20, 7, 7, 7, -6, -78, -14, -56, -7, -125, 1920, -38, -580, -740, -220]
+活动收益金额列表: ['5.00', '15.00']
+56.57
+-580.0
+20.0
+{'2019-01-11到2019-01-23合计收益': -503.43, '2019-01-11到2019-01-23跟随收益': 56.57, '2019-01-11到2019-01-23交易收益': -580.0, '2019-01-11到2019-01-23活动收益': 20.0}
+======测试结束======
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr class='passClass warning'>
+    <td>test_11_Count_v2_5_.TotalAssets</td>
+    <td class="text-center">6</td>
+    <td class="text-center">6</td>
+    <td class="text-center">0</td>
+    <td class="text-center">0</td>
+    <td class="text-center"><a href="javascript:showClassDetail('c13',6)" class="detail" id='c13'>详细</a></td>
+</tr>
+
+<tr id='pt13_1' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_00: 明细</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt13_1' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt13_1'>通过</button>
+    <div id='div_pt13_1' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt13_1' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt13_1'>通过</button>
+    <div id='div_pt13_1' class="collapse in">
+    <pre>
+    
+pt13_1: ======测试开始======
+------------------------------getUserInfo------------------------------
+{'nickname': 'OKc01', 'phone': '15013038819', 'mobile_fiex': '86', 'realname': '测试001', 'email': 'yang6333yyx@126.com', 'idcard': '87****99', 'account_level': 3, 'account_integral': 12240, 'real_mt5_id': '880862', 'demo_mt5_id': '886116', 'avatar': 'https://image.wavehk.cn/uploads/20180319/FmTlDOft52xEFMmwO5Kouy8XXJQd.png', 'yesterdayIncome': 0, 'income': '-479.32', 'amount': '121250.49', 'canWithdraw': '431.00', 'mt5_canWithdraw': 118269.15, 'mt5_yesterday_income': 0, 'mt5_income': -580, 'is_real': 1, 'accountType': 'real', 'risk_level': '0', 'available_balance': '431.00', 'follow_money': '2500.00', 'follow_income_ing': '50.34'}
+总资产:121250.49
+累计收益:-479.32
+昨日收益:0
+波浪余额:431.00
+MT5账户余额:118269.15
+跟随总金额:2500.00
+跟随收益:50.34
+
+{'总资产': 121250.49, '累计收益': -479.32, '昨日收益': 0.0, '波浪余额': 431.0, 'MT5账户余额': 118269.15, '跟随总金额': 2500.0, '跟随收益': 50.34}
+======测试结束======
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt13_2' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_01: 波浪余额</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt13_2' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt13_2'>通过</button>
+    <div id='div_pt13_2' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt13_2' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt13_2'>通过</button>
+    <div id='div_pt13_2' class="collapse in">
+    <pre>
+    
+pt13_2: ======测试开始======
+------------------------------getUserInfo------------------------------
+{'总资产': 121250.49, '累计收益': -479.32, '昨日收益': 0.0, '波浪余额': 431.0, 'MT5账户余额': 118269.15, '跟随总金额': 2500.0, '跟随收益': 50.34}
+======测试结束======
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt13_3' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_02: 跟随总金额</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt13_3' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt13_3'>通过</button>
+    <div id='div_pt13_3' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt13_3' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt13_3'>通过</button>
+    <div id='div_pt13_3' class="collapse in">
+    <pre>
+    
+pt13_3: ======测试开始======
+------------------------------getUserInfo------------------------------
+{'总资产': 121250.49, '累计收益': -479.32, '昨日收益': 0.0, '波浪余额': 431.0, 'MT5账户余额': 118269.15, '跟随总金额': 2500.0, '跟随收益': 50.34}
+======测试结束======
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt13_4' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_03: 跟随收益</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt13_4' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt13_4'>通过</button>
+    <div id='div_pt13_4' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt13_4' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt13_4'>通过</button>
+    <div id='div_pt13_4' class="collapse in">
+    <pre>
+    
+pt13_4: ======测试开始======
+------------------------------getUserInfo------------------------------
+{'总资产': 121250.49, '累计收益': -479.32, '昨日收益': 0.0, '波浪余额': 431.0, 'MT5账户余额': 118269.15, '跟随总金额': 2500.0, '跟随收益': 50.34}
+======测试结束======
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt13_5' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_04: MT5账户余额</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt13_5' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt13_5'>通过</button>
+    <div id='div_pt13_5' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt13_5' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt13_5'>通过</button>
+    <div id='div_pt13_5' class="collapse in">
+    <pre>
+    
+pt13_5: ======测试开始======
+------------------------------getUserInfo------------------------------
+{'总资产': 121250.49, '累计收益': -479.32, '昨日收益': 0.0, '波浪余额': 431.0, 'MT5账户余额': 118269.15, '跟随总金额': 2500.0, '跟随收益': 50.34}
+======测试结束======
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt13_6' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_05: 总资产</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt13_6' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt13_6'>通过</button>
+    <div id='div_pt13_6' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt13_6' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt13_6'>通过</button>
+    <div id='div_pt13_6' class="collapse in">
+    <pre>
+    
+pt13_6: ======测试开始======
+------------------------------getUserInfo------------------------------
+{'总资产': 121250.49, '累计收益': -479.32, '昨日收益': 0.0, '波浪余额': 431.0, 'MT5账户余额': 118269.15, '跟随总金额': 2500.0, '跟随收益': 50.34}
+======测试结束======
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='total_row' class="text-center active">
+    <td>总计</td>
+    <td>77</td>
+    <td>73</td>
+    <td>2</td>
+    <td>2</td>
+    <td>通过率：94.81%</td>
+</tr>
+</table>
+
+<div id='ending'>&nbsp;</div>
+    <div style=" position:fixed;right:50px; bottom:30px; width:20px; height:20px;cursor:pointer">
+    <a href="#"><span class="glyphicon glyphicon-eject" style = "font-size:30px;" aria-hidden="true">
+    </span></a></div>
+    
+
+</body>
+</html>

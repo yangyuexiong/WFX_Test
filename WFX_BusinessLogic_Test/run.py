@@ -10,6 +10,7 @@ import unittest
 from common.HTMLTestReportCN import HTMLTestRunner
 import time
 import sys
+from config import *
 
 path = '/Users/yangyuexiong/Desktop/WFX_BusinessLogic_Test'
 sys.path.append(path)
@@ -18,9 +19,16 @@ sys.path.append(path)
 report_dir = './reports'
 # 测试路径
 test_dir = './case'
+# 文件前缀
+file_prefix = 'test*.py'
+
+if not C:
+    file_prefix = ''
+
+print('报告路径:{}\n测试路径:{}\n文件前缀:{}\n'.format(report_dir, test_dir, file_prefix))
 
 # 测试路径，匹配规则
-discover = unittest.defaultTestLoader.discover(test_dir, pattern='test*.py')
+discover = unittest.defaultTestLoader.discover(test_dir, pattern=file_prefix)
 
 # 时间拼接报告名称
 now = time.strftime('%Y-%m-%d %H_%M_%S')
@@ -33,13 +41,14 @@ with open(report_name, 'wb') as f:
     runner.run(discover)
     f.close()
 
-    # from common.public_func import latest_report, send_mail
+    if SEND_MAIL:
+        from common.public_func import latest_report, send_mail
 
-    # print('查找最新报告')
-    # latest_report = latest_report(report_dir)
-    # print(latest_report)
-    # print('发送报告到邮箱')
-    # send_mail(latest_report)
-    #
+        print('查找最新报告')
+        latest_report = latest_report(report_dir)
+        print(latest_report)
+        print('发送报告到邮箱')
+        send_mail(latest_report)
+
 if __name__ == '__main__':
     pass
