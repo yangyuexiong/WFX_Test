@@ -20,7 +20,7 @@ report_dir = './reports'
 # 测试路径
 test_dir = './case'
 # 文件前缀
-file_prefix = 'test*.py'
+file_prefix = 'test_*.py'
 
 if not C:
     file_prefix = ''

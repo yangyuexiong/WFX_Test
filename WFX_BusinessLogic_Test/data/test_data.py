@@ -4,8 +4,3 @@
 # @Email   : yang6333yyx@126.com
 # @File    : test_data.py
 # @Software: PyCharm
-
-
-account_dict = {
-
-}
