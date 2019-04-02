@@ -64,25 +64,25 @@ def set_dict_s(analyst_id, day):
     delta = okc1 - okc2
     # print(delta.days)
 
-    if delta.days > 30:
-        print('执行')
-        num = 0
-        for i in range(0, int(day)):
-            # print(num)
-            k1 = 'analystProfits[%s].date' % str(num)
-            k2 = 'analystProfits[%s].profit' % str(num)
-            # print(k1)
-            # print(k2)
-            now = datetime.datetime.now()
-            add_day = now + datetime.timedelta(days=i)
-            # print(add_day.strftime("%Y%m%d"))
-            # zip(a, b)
-            analyst_p[k1] = add_day.strftime("%Y%m%d")
-            analyst_p[k2] = random.choice(profit)
-            num += 1
-        return analyst_p
-    else:
-        return False
+    # if delta.days > 30:
+    #     print('执行')
+    #     num = 0
+    #     for i in range(0, int(day)):
+    #         # print(num)
+    #         k1 = 'analystProfits[%s].date' % str(num)
+    #         k2 = 'analystProfits[%s].profit' % str(num)
+    #         # print(k1)
+    #         # print(k2)
+    #         now = datetime.datetime.now()
+    #         add_day = now + datetime.timedelta(days=i)
+    #         # print(add_day.strftime("%Y%m%d"))
+    #         # zip(a, b)
+    #         analyst_p[k1] = add_day.strftime("%Y%m%d")
+    #         analyst_p[k2] = random.choice(profit)
+    #         num += 1
+    #     return analyst_p
+    # else:
+    #     return False
 
 
 class SetAnalyst(StartEnd):
@@ -97,6 +97,7 @@ class SetAnalyst(StartEnd):
 
     analyst_u = 'http://plan.wavehk.cn:8310/analyst/update'
 
+    @unittest.skip('ppppp')
     def test_set_analyst1(self):
         """登录分析师后台-设置收益"""
 
@@ -104,15 +105,21 @@ class SetAnalyst(StartEnd):
         s = requests.Session()
         s.post(self.login, self.acc, verify=False)
         cookies = s.cookies
+        print(s)
+        print(cookies)
 
         # 设置每日盈亏
         analyst_p = set_dict_s(275, 30)
-        # print(analyst_p)
+        print(analyst_p)
 
         # 设置
-        if analyst_p:
-            lo = requests.post(self.analyst_u, analyst_p, cookies=cookies, verify=False)
-            print(lo.text)
+        # if analyst_p:
+        #     lo = requests.post(self.analyst_u, analyst_p, cookies=cookies, verify=False)
+        #     print(lo.text)
+
+    def test_set_analyst2(self):
+        """22222"""
+        get_time_ss(275)
 
     @unittest.skip('PhantomJS')
     def test_set_analyst0(self):
@@ -154,5 +161,30 @@ class FollowTest(StartEnd):
         # print(lo.json())
 
 
+def get_time_ss(analyst_id):
+    login = 'http://plan.wavehk.cn:8310/login'
+
+    acc = {
+        'username': '17688958885',
+        'password': 'abc123456'
+    }
+
+    profit = [10, 50, 100, 200]
+    analyst_p = {
+        'analystId': int(analyst_id),
+        'amount': 5000.0,
+        # 'analystProfits[0].date': 20190109,
+        # 'analystProfits[0].profit': 100.0,
+    }
+
+    # 登录
+    s = requests.Session()
+    s.post(login, acc, verify=False)
+    cookies = s.cookies
+    print(cookies)
+
+
 if __name__ == '__main__':
     unittest.main()
+
+

@@ -30,6 +30,7 @@ class TotalAssets(StartEnd):
         # 波浪余额 = 总资产 - 跟随总金额 - 跟随收益 - MT5余额
         r = get_user_info()
         print(r)
+        # print(round(r['总资产'] - r['跟随总金额'] - r['跟随收益'] - r['MT5账户余额'], 2))
         assert r['波浪余额'] == round(r['总资产'] - r['跟随总金额'] - r['跟随收益'] - r['MT5账户余额'], 2)
 
     def test_02(self):

@@ -29,6 +29,52 @@ def app_login():
     return lo.json()
 
 
+"""
+analystId	272
+amount	2000.0
+analystProfits[0].date	20190301
+analystProfits[0].profit	1.0
+analystProfits[1].date	20190302
+analystProfits[1].profit	2
+
+"""
+
+x1 = [x * x for x in range(1, 11) if x % 2 == 0]
+print(x1)
+
+l = []
+for x in range(1, 11):
+    if x % 2 == 0:
+        l.append(x * x)
+print(l)
+
+
+def xxx(x):
+    return x + 1
+
+
+print(xxx(2))
+
+f = lambda x: x + 1
+print(f(2))
+
+import profile
+import cProfile
+
+"""
+ncall：函数运行次数
+
+tottime： 函数的总的运行时间，减去函数中调用子函数的运行时间
+
+第一个percall：percall = tottime / nclall 
+
+cumtime:函数及其所有子函数调整的运行时间，也就是函数开始调用到结束的时间。
+
+第二个percall：percall = cumtime / nclall 
+
+"""
+
 if __name__ == '__main__':
     pass
+    # cProfile.run('app_login()')
     # app_login()
