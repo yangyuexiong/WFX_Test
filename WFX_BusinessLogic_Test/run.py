@@ -52,6 +52,3 @@ with open(report_name, 'wb') as f:
 
 if __name__ == '__main__':
     pass
-    pass
-    pass
-    pass
