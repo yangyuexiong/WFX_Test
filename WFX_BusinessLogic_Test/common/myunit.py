@@ -22,6 +22,8 @@ killall phantomjs
 ps -ef | grep chromedriver
 killall chromedriver
 """
+
+
 class StartEnd(unittest.TestCase):
     driver_swicth = False
     # mac
@@ -40,14 +42,17 @@ class StartEnd(unittest.TestCase):
         chrome_options.add_argument('blink-settings=imagesEnabled=false')  # 不加载图片, 提升速度
         chrome_options.add_argument('--headless')  # 浏览器不提供可视化页面. linux下如果系统不支持可视化不加这条会启动失败
         # chrome_options.binary_location = "./chromedriver_for_mac/chromedriver"  # 手动指定使用的浏览器位置
+        # mac: 将chromedriver放在 /usr/bin 可以直接使用。
+        # 放在项目目录下添加路径:executable_path='./chromedriver_for_mac/chromedriver'。
         driver = webdriver.Chrome(executable_path='./chromedriver_for_mac/chromedriver', chrome_options=chrome_options)
 
     def setUp(self):
         print('======测试开始======')
 
     def tearDown(self):
-        # self.driver.quit()
+        self.driver.quit()
         if self.driver_swicth:
             # mac
-            os.system("killall phantomjs")
+            # os.system("killall phantomjs")
+            os.system("killall chromedriver")
         print('======测试结束======')
