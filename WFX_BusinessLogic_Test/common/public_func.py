@@ -36,6 +36,7 @@ def app_login():
     }
 
     lo = requests.post(base_url1, json=param_data1, verify=False)
+    print(lo.json())
     return lo.json()
 
 
@@ -275,3 +276,4 @@ if __name__ == '__main__':
     #     print('1')
     # else:
     #     print("2")
+    app_login()
