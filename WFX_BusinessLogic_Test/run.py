@@ -19,6 +19,7 @@ sys.path.append(path)
 report_dir = './reports'
 # 测试路径
 test_dir = './case'
+# test_dir = './case/v3.0_'
 # 文件前缀
 file_prefix = 'test_*.py'
 

@@ -1,0 +1,66 @@
+<component name="InspectionProjectProfileManager">
+  <profile version="1.0">
+    <option name="myName" value="Project Default" />
+    <inspection_tool class="PyPackageRequirementsInspection" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="ignoredPackages">
+        <value>
+          <list size="32">
+            <item index="0" class="java.lang.String" itemvalue="BeautifulSoup" />
+            <item index="1" class="java.lang.String" itemvalue="pbr" />
+            <item index="2" class="java.lang.String" itemvalue="decorator" />
+            <item index="3" class="java.lang.String" itemvalue="Babel" />
+            <item index="4" class="java.lang.String" itemvalue="Whoosh" />
+            <item index="5" class="java.lang.String" itemvalue="guess-language" />
+            <item index="6" class="java.lang.String" itemvalue="SQLAlchemy" />
+            <item index="7" class="java.lang.String" itemvalue="psycopg2" />
+            <item index="8" class="java.lang.String" itemvalue="Flask-WhooshAlchemy" />
+            <item index="9" class="java.lang.String" itemvalue="MarkupSafe" />
+            <item index="10" class="java.lang.String" itemvalue="sqlalchemy-migrate" />
+            <item index="11" class="java.lang.String" itemvalue="Jinja2" />
+            <item index="12" class="java.lang.String" itemvalue="speaklater" />
+            <item index="13" class="java.lang.String" itemvalue="Flask-Login" />
+            <item index="14" class="java.lang.String" itemvalue="sqlparse" />
+            <item index="15" class="java.lang.String" itemvalue="python-openid" />
+            <item index="16" class="java.lang.String" itemvalue="Flask" />
+            <item index="17" class="java.lang.String" itemvalue="Flask-OpenID" />
+            <item index="18" class="java.lang.String" itemvalue="blinker" />
+            <item index="19" class="java.lang.String" itemvalue="coverage" />
+            <item index="20" class="java.lang.String" itemvalue="six" />
+            <item index="21" class="java.lang.String" itemvalue="Werkzeug" />
+            <item index="22" class="java.lang.String" itemvalue="Flask-WTF" />
+            <item index="23" class="java.lang.String" itemvalue="gunicorn" />
+            <item index="24" class="java.lang.String" itemvalue="Flask-SQLAlchemy" />
+            <item index="25" class="java.lang.String" itemvalue="WTForms" />
+            <item index="26" class="java.lang.String" itemvalue="flipflop" />
+            <item index="27" class="java.lang.String" itemvalue="Flask-Mail" />
+            <item index="28" class="java.lang.String" itemvalue="Tempita" />
+            <item index="29" class="java.lang.String" itemvalue="pytz" />
+            <item index="30" class="java.lang.String" itemvalue="Flask-Babel" />
+            <item index="31" class="java.lang.String" itemvalue="Flask-script" />
+          </list>
+        </value>
+      </option>
+    </inspection_tool>
+    <inspection_tool class="PyPep8Inspection" enabled="true" level="WEAK WARNING" enabled_by_default="true">
+      <option name="ignoredErrors">
+        <list>
+          <option value="W292" />
+        </list>
+      </option>
+    </inspection_tool>
+    <inspection_tool class="PyUnresolvedReferencesInspection" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="ignoredIdentifiers">
+        <list>
+          <option value="y.bbs.views.bbs" />
+          <option value="flask.ext.*" />
+          <option value="config.*" />
+          <option value="app.*" />
+          <option value="httplib" />
+          <option value="run2.*" />
+          <option value="locust.TaskSet" />
+          <option value="locust.HttpLocust" />
+        </list>
+      </option>
+    </inspection_tool>
+  </profile>
+</component>

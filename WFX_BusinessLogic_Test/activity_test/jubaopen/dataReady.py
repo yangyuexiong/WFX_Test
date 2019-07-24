@@ -202,7 +202,7 @@ def mt5_recharge(req):
         'mt5Id': m[0],
         'type': 1,
         'payType': '电汇',
-        'amountUsd': 1000,
+        'amountUsd': 10000,
         'amountCny': 6.75,
         'remark': '测试',
         'payRate': 6.75,
