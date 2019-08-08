@@ -127,14 +127,3 @@ class MyPyMysql:
         except BaseException as e:
             db.rollback()
             return '出现错误:{}'.format(str(e))
-
-
-import random
-
-l = ['11.3', '1', '2', '3']
-ac = random.choice(l)
-print(ac)
-u1 = [11.5, 222222222, 11.6, 11.7, 11.4, 11.3, 333333333, 11.8, 11.9, 12, 12.1, 12.2, 12.3, 12.4, 999999999,
-      11.2, 11.1, 11, 10.9, 10.8, 10.7, 10.6]
-
-print(len(u1))

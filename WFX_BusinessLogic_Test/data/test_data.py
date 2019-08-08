@@ -4,3 +4,11 @@
 # @Email   : yang6333yyx@126.com
 # @File    : test_data.py
 # @Software: PyCharm
+
+
+register_phone = '15009876543'
+
+header = {
+    "source": 'bl',
+    "token": ""
+}
